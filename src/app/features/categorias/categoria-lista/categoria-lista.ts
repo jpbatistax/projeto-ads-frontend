@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoriaForm } from '../categoria-form/categoria-form';
+import { CategoriaService } from '../../../core/services/categoria.service';
+import { Categoria } from '../../../models/categoria.model';
 
 @Component({
   imports: [CategoriaForm],
@@ -7,4 +9,13 @@ import { CategoriaForm } from '../categoria-form/categoria-form';
   styleUrl: './categoria-lista.css',
   templateUrl: './categoria-lista.html',
 })
-export class CategoriaLista {}
+export class CategoriaLista implements OnInit {
+  categorias!:Categoria[];
+  constructor(private categoriaService: CategoriaService) {
+
+  }
+  ngOnInit(): void {
+    this.categorias = this.categoriaService.listar();
+  }
+}
+
